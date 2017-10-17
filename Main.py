@@ -3,7 +3,7 @@ from antlr4 import *
 from SqlLexer import SqlLexer
 from SqlParser import SqlParser
 from SqlListener import SqlListener
-from metrics import Metrics
+from Metrics import Metrics
 
 def main(argv):
     input = FileStream(argv[1])
@@ -16,7 +16,8 @@ def main(argv):
     walker = ParseTreeWalker()
     metrics = Metrics()
     walker.walk(metrics, tree)
-    print("There is", metrics.howManyJoins(), "joins")
+    print("There are", metrics.howManyJoins(), "joins")
+    print("There are", metrics.howManyTransactions(), "transactions")
 
 if __name__ == '__main__':
     main(sys.argv)
