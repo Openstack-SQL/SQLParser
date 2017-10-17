@@ -1,1 +1,1 @@
-SELECT * FROM (SELECT foo from foobar)
+SELECT * FROM (SELECT foo from foobar JOIN truc)
