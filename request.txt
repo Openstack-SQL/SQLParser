@@ -1,1 +1,1 @@
-SELECT * FROM (SELECT foo from foobar JOIN truc)
+SELECT * FROM (SELECT foo FROM jojo_dba JOIN truc) OUTER JOIN fredoDB LEFT JOIN quiqui
