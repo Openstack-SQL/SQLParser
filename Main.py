@@ -11,7 +11,7 @@ def parse(query):
     stream = CommonTokenStream(lexer)
     parser = SqlParser(stream)
     tree = parser.sql_stmt()
-    # print(tree.toStringTree(recog=parser))
+    #print(tree.toStringTree(recog=parser))
 
     walker = ParseTreeWalker()
     metrics = Metrics()

@@ -752,6 +752,7 @@ any_name
  : IDENTIFIER 
  | keyword
  | STRING_LITERAL
+ | '%(' IDENTIFIER ')s'
  | '(' any_name ')'
  ;
 
@@ -913,7 +914,7 @@ IDENTIFIER
  : '"' (~'"' | '""')* '"'
  | '`' (~'`' | '``')* '`'
  | '[' ~']'* ']'
- | [a-zA-Z_] [a-zA-Z_0-9]* // TODO check: needs more chars in set
+ | [a-zA-Z_%] [a-zA-Z_0-9%]* // TODO check: needs more chars in set
  ;
 
 NUMERIC_LITERAL
