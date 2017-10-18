@@ -28,5 +28,31 @@ def main(argv):
             if i > 10:
                 break
 
+def report(argv, nb_requests = 10):
+    i = 0
+    nb_join = 0
+    nb_transac = 0
+
+    with open(argv[1], 'r') as file:
+        for line in file:
+            tree = SqlParser(CommonTokenStream(SqlLexer(InputStream(line)))).sql_stmt()
+            walker = ParseTreeWalker()
+            metrics = Metrics()
+            walker.walk(metrics, tree)
+
+            nb_join += metrics.howManyJoins()
+            nb_transac += metrics.howManyTransactions()
+            
+            i += 1
+            if i >= nb_requests:
+                break
+
+    print(nb_requests, "requests have been analysed")
+    print("Overall, there are")
+    print(" -", nb_join, "joins")
+    print(" -", nb_transac, "transactions")
+    ## end
+
 if __name__ == '__main__':
-    main(sys.argv)
+    #main(sys.argv)
+    report(sys.argv, 5)
