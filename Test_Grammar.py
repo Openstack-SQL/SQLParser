@@ -1,4 +1,7 @@
 import sys
+import time
+from functools import reduce
+from multiprocessing.dummy import Pool as ThreadPool 
 from antlr4 import *
 from parser.SqlLexer import SqlLexer
 from parser.SqlParser import SqlParser
@@ -17,14 +20,15 @@ def parse(query):
     return parser._syntaxErrors
 
 def main(argv):
-    i = 0
     nbErr = 0
+    pool = ThreadPool(4)
+    result = []
     with open(argv[1], 'r') as file:
-        for i, line in enumerate(file):
-            nbErr += parse(line)
-            if nbErr > 0:
-                break
-    print(nbErr,"syntax errors found")
+        result = pool.map(parse, file)
+    print(reduce(lambda a,b: a + b, result),"syntax errors found")
 
 if __name__ == '__main__':
+    start = time.time()
     main(sys.argv)
+    end = time.time()
+    print("Done in ", end - start, "seconds")
