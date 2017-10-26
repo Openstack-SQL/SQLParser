@@ -752,7 +752,7 @@ any_name
  : IDENTIFIER 
  | keyword
  | STRING_LITERAL
- | '%(' IDENTIFIER ')s'
+ | '%(' any_name ')s'
  | '(' any_name ')'
  ;
 
