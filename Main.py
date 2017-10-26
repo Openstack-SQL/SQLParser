@@ -1,8 +1,8 @@
 import sys
 from antlr4 import *
-from SqlLexer import SqlLexer
-from SqlParser import SqlParser
-from SqlListener import SqlListener
+from parser.SqlLexer import SqlLexer
+from parser.SqlParser import SqlParser
+from parser.SqlListener import SqlListener
 from Metrics import Metrics
 
 def parse(query):
@@ -18,15 +18,6 @@ def parse(query):
     walker.walk(metrics, tree)
     print("There are", metrics.howManyJoins(), "joins")
     print("There are", metrics.howManyTransactions(), "transactions")
-
-def main(argv):
-    i = 0
-    with open(argv[1], 'r') as file:
-        for line in file:
-            parse(line)
-            i += 1
-            if i > 10:
-                break
 
 def report(argv, nb_requests = 10):
     i = 0
@@ -53,6 +44,13 @@ def report(argv, nb_requests = 10):
     print(" -", nb_transac, "transactions")
     ## end
 
+
+def parse_with_metrics(db_request):
+    tree = SqlParser(CommonTokenStream(SqlLexer(InputStream(line)))).sql_stmt()
+    metrics = Metrics()
+    ParseTreeWalker().walk(metrics, tree)
+    return metrics()
+
 if __name__ == '__main__':
-    #main(sys.argv)
-    report(sys.argv, 5)
+    # main(sys.argv)
+    report(sys.argv, nb_requests = 1758)

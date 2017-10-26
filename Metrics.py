@@ -1,4 +1,4 @@
-from SqlListener import SqlListener
+from parser.SqlListener import SqlListener
 
 class Metrics(SqlListener):
     nb_join = 0
