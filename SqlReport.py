@@ -1,9 +1,9 @@
 import sys
 from antlr4 import *
-from parser.SqlLexer import SqlLexer
-from parser.SqlParser import SqlParser
-from parser.SqlListener import SqlListener
-from Metrics import Metrics
+from SQLParser.parser.SqlLexer import SqlLexer
+from SQLParser.parser.SqlParser import SqlParser
+from SQLParser.parser.SqlListener import SqlListener
+from SQLParser.Metrics import Metrics
 
 class SqlReport:
 
