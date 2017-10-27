@@ -1,7 +1,7 @@
 import sys
 import time
 from functools import reduce
-from multiprocessing.dummy import Pool as ThreadPool 
+from multiprocessing import Pool as ThreadPool 
 from antlr4 import *
 from parser.SqlLexer import SqlLexer
 from parser.SqlParser import SqlParser
@@ -12,7 +12,7 @@ def parse(query):
     lexer = SqlLexer(InputStream(query))
     stream = CommonTokenStream(lexer)
     parser = SqlParser(stream)
-    #parser.buildParseTrees = False
+    parser.buildParseTrees = False
     tree = parser.sql_stmt()
     if parser._syntaxErrors > 0:
         print(tree.toStringTree(recog=parser))
