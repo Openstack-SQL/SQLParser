@@ -7,8 +7,7 @@ from SQLParser.parser.SqlListener import SqlListener
 from SQLParser.Metrics import Metrics
 
 class SqlReportProcessor:
-    def __init__(self):
-        generalReport = SqlReport()
+    generalReport = SqlReport()
 
     def reportFromFile(self, path):
         with open(path, 'r') as file:
